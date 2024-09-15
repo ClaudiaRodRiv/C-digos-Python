@@ -4,6 +4,8 @@ import xml.etree.ElementTree as ET
 
 """
 CorrectorXML.py
+
+Descripción:
 Este script se utiliza para corregir archivos XML generados de órdenes en temporada de descuentos, 
 los cuales pueden tener errores de códigos de descuento duplicados. El objetivo del script es unificar los códigos de descuento 
 duplicados para que los XML puedan viajar entre plataformas correctamente, evitando la necesidad de corrección manual.
