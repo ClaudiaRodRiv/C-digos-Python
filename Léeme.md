@@ -1,4 +1,4 @@
-# Códigos-Python
+# Códigos - Python
 
 Hola, soy Claudia Rodríguez, estudiante de Ingeniería en Sistemas Computacionales en la Escuela Superior de Cómputo del Instituto Politécnico Nacional. Cuento con un certificado como Técnica en Computación del Centro de Estudios Científicos y Tecnológicos No. 8 del mismo instituto. 
 
