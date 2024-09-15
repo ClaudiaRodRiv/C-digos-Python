@@ -5,6 +5,8 @@ from openpyxl import load_workbook
 
 """
 FormatoDevoluciones.py
+
+Descripción:
 Este script se utiliza para generar archivos CSV a partir de un archivo Excel que contiene información de artículos. 
 El formato generado es utilizado en el proceso de actualización de precios de artículos en mi entorno de trabajo.
 
