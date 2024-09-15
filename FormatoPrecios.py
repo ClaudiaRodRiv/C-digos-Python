@@ -3,6 +3,8 @@ from openpyxl.styles import Font, Alignment, Border, Side
 
 """
 FormatoActualizacionPrecios.py
+
+Descripción:
 Este script genera un archivo Excel que sigue un formato específico para la actualización de precios de artículos según la lista seleccionada.
 Está diseñado para ser utilizado en mi entorno de trabajo para generar el formato que se utiliza para actualizar precios en
 varias listas como 'Wholesale', 'Devoluciones', 'Amazon', etc.
