@@ -21,73 +21,73 @@ Puedes ajustar las columnas y los datos en el DataFrame según los requisitos es
 """
 
 # Función para seleccionar un archivo Excel
-def seleccionar_excel():
+def SeleccionarExcel():
     # Se abre un cuadro de diálogo para que el usuario seleccione el archivo Excel
-    ruta_excel = filedialog.askopenfilename(title="Seleccionar Excel", filetypes=[("Excel files", "*.xlsx *.xls")])
-    return ruta_excel
+    RutaExcel = filedialog.askopenfilename(title="Seleccionar Excel", filetypes=[("Excel files", "*.xlsx *.xls")])
+    return RutaExcel
 
 # Función para seleccionar la carpeta de destino
-def seleccionar_carpeta():
+def SeleccionarCarpeta():
     # Se abre un cuadro de diálogo para que el usuario seleccione la carpeta de destino para guardar los CSV
-    ruta_carpeta = filedialog.askdirectory(title="Seleccionar carpeta de destino")
-    return ruta_carpeta
+    RutaCarpeta = filedialog.askdirectory(title="Seleccionar carpeta de destino")
+    return RutaCarpeta
 
 # Función principal para procesar el Excel y generar los CSV
-def procesar_excel(ruta_excel, ruta_carpeta):
+def ProcesarExcel(RutaExcel, RutaCarpeta):
     # Cargar el libro de Excel con openpyxl
-    workbook = load_workbook(ruta_excel)
+    LibroTrabajo = load_workbook(RutaExcel)
     # Obtener los nombres de todas las hojas en el Excel
-    nombres_hojas = workbook.sheetnames
+    NombresHojas = LibroTrabajo.sheetnames
 
     # Iterar sobre cada hoja en el archivo Excel
-    for nombre_hoja in nombres_hojas:
-        hoja = workbook[nombre_hoja]
+    for NombreHoja in NombresHojas:
+        Hoja = LibroTrabajo[NombreHoja]
 
         # Crear un diccionario para almacenar los datos de la hoja actual en formato de columnas.
         # A continuación se especifica qué valores se colocarán en cada columna del archivo CSV que se va a generar.
         # Estos valores pueden ser ajustados según las necesidades del usuario.
-        data = {
-            'A': ['ParentKey', 'ItemCode'] + [hoja[f'A{i}'].value for i in range(2, hoja.max_row + 1)],  # Columna A: ParentKey, ItemCode, y datos de la columna A del Excel
-            'B': ['LineNum', 'LineNum'] + [36] * (hoja.max_row - 1),  # Columna B: Valor fijo 36 para todas las filas
-            'C': ['PriceList', 'PriceList'] + [37] * (hoja.max_row - 1),  # Columna C: Valor fijo 37 para todas las filas
-            'D': ['Price', 'Price'] + [hoja[f'F{i}'].value for i in range(2, hoja.max_row + 1)],  # Columna D: Precios tomados de la columna F del Excel
-            'E': ['Currency', 'Currency'] + ['$'] * (hoja.max_row - 1),  # Columna E: Valor fijo "$" para todas las filas
+        Datos = {
+            'A': ['ParentKey', 'ItemCode'] + [Hoja[f'A{i}'].value for i in range(2, Hoja.max_row + 1)],  # Columna A: ParentKey, ItemCode, y datos de la columna A del Excel
+            'B': ['LineNum', 'LineNum'] + [36] * (Hoja.max_row - 1),  # Columna B: Valor fijo 36 para todas las filas
+            'C': ['PriceList', 'PriceList'] + [37] * (Hoja.max_row - 1),  # Columna C: Valor fijo 37 para todas las filas
+            'D': ['Price', 'Price'] + [Hoja[f'F{i}'].value for i in range(2, Hoja.max_row + 1)],  # Columna D: Precios tomados de la columna F del Excel
+            'E': ['Currency', 'Currency'] + ['$'] * (Hoja.max_row - 1),  # Columna E: Valor fijo "$" para todas las filas
         }
 
         # Crear un DataFrame con pandas usando el diccionario de datos
-        df = pd.DataFrame(data)
+        DataFrame = pd.DataFrame(Datos)
 
         # Definir la ruta y el nombre del archivo CSV que se generará
-        ruta_csv = os.path.join(ruta_carpeta, f"Devoluciones Palacio {nombre_hoja}.csv")
+        RutaCSV = os.path.join(RutaCarpeta, f"Devoluciones Palacio {NombreHoja}.csv")
         # Guardar el DataFrame como un archivo CSV, sin índices ni encabezados
-        df.to_csv(ruta_csv, index=False, header=False)
+        DataFrame.to_csv(RutaCSV, index=False, header=False)
 
     # Mensaje de confirmación cuando el proceso ha terminado
     print("Proceso completado.")
 
 # Configurar la interfaz gráfica
-def crear_interfaz():
+def CrearInterfaz():
     # Crear una ventana oculta usando Tkinter
-    root = Tk()
-    root.withdraw()  # Ocultar la ventana principal ya que solo usaremos los cuadros de diálogo
+    VentanaPrincipal = Tk()
+    VentanaPrincipal.withdraw()  # Ocultar la ventana principal ya que solo usaremos los cuadros de diálogo
 
     # Llamar a la función para seleccionar el archivo Excel
-    ruta_excel = seleccionar_excel()
-    if not ruta_excel:
+    RutaExcel = SeleccionarExcel()
+    if not RutaExcel:
         # Si no se selecciona un archivo, mostrar un mensaje y salir
         print("No se seleccionó ningún archivo Excel.")
         return
 
     # Llamar a la función para seleccionar la carpeta de destino
-    ruta_carpeta = seleccionar_carpeta()
-    if not ruta_carpeta:
+    RutaCarpeta = SeleccionarCarpeta()
+    if not RutaCarpeta:
         # Si no se selecciona una carpeta, mostrar un mensaje y salir
         print("No se seleccionó ninguna carpeta de destino.")
         return
 
     # Llamar a la función para procesar el archivo Excel y generar los CSV
-    procesar_excel(ruta_excel, ruta_carpeta)
+    ProcesarExcel(RutaExcel, RutaCarpeta)
 
 # Ejecutar la interfaz cuando se ejecuta el script directamente
 if __name__ == "__main__":
-    crear_interfaz()
+    CrearInterfaz()
