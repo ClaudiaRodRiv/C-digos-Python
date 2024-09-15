@@ -9,7 +9,7 @@ El usuario debe ingresar el nombre de la carpeta dentro del directorio base dond
 El script recorre cada archivo .dat en la carpeta especificada, lee su contenido y verifica si el texto buscado está presente. 
 Si el texto se encuentra, se imprime el nombre del archivo que contiene el texto.
 
-Instrucciones:
+Uso:
 1. Modifique la variable 'Ruta' con la ruta base donde están ubicados los archivos .dat.
 2. Ejecute el script e ingrese el nombre de la carpeta cuando se le solicite.
 3. Defina el texto a buscar en la variable 'Buscar'.
